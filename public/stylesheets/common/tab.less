@@ -1,0 +1,227 @@
+.tab-gradient {
+    margin-bottom: 98px;
+    .tab-nav {
+        display: flex;
+        justify-content: space-between;
+        li {
+            flex: 1 1 280px;
+            position: relative;
+            padding-top: 12px;
+            &:not(:first-child) {
+                margin-left: 26px;
+            }
+            > a  {
+                display: block;
+                width: 100%;
+                height: 44px;
+                padding: 8px 16px;
+                line-height: 28px;
+                font-size: 18px;
+                white-space: nowrap;
+                color: @text-title;
+                text-align: center;
+                background-color: #eee;
+                position: relative;
+                cursor: pointer;
+                transition: all .3s linear;    
+                &::before, &::after {
+                    position: absolute;
+                    top: 0;
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    border-style: solid;
+                    border-width: 5px;
+                }
+                &::before {
+                    left: 0;
+                    border-color: #fff transparent transparent #fff;
+                }
+                &::after {
+                    right: 0;
+                    border-color: #fff #fff transparent transparent;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            
+            &.active, &:hover {
+                 > a {
+                    color: #fff;
+                    .linear_gradient(left);
+                }
+            }
+        }
+        &-decoration-1, &-decoration-2 {
+            position: absolute;
+            top: 6px;
+            width: e('calc((100% - 8px - 8px - 42px) / 2)');
+            border-top: 1px solid #ddd;
+            transition: all .3s linear;
+            .active &, li:hover & {
+                border-color: #2bf491;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                top: -3px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                transition: all .3s linear;
+                .active &, li:hover & {
+                    border-color: #2bf491;
+                }
+            }
+            &::after {
+                content: '';
+                position: absolute;
+                top: -1px;
+                z-index: 9;
+                width: 12px;
+                height: 1px;
+                background-color: #ddd;
+                transition: all .3s linear;
+                .active &, li:hover & {
+                    background-color: #2bf491;
+                }
+            }
+        }
+        &-decoration-1 {
+            left: 8px;
+            &::before {
+                right: -6px;
+            }
+            &::after {
+                left: -12px;
+                transform-origin: right top;
+                transform: rotate(-45deg);
+            }
+        }
+        &-decoration-2 {
+            right: 8px;
+            &::before {
+                left: -6px;
+            }
+            &::after {
+                right: -12px;
+                transform-origin: left top;
+                transform: rotate(45deg);
+            }
+        }
+    }
+    .tab-content {
+        padding-bottom: 40px;
+        border: 1px solid #eee;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #888;
+        font-weight: lighter;
+        background-color: #fff;
+        > div {
+            padding: 0 40px;
+            &:not(:first-child) {
+                display: none;
+            }
+        }
+        p {
+            margin-bottom: 16px;
+            text-indent: 2em;
+        }
+    }
+}
+.tab-simple {
+    background-color: #fff;
+    .tab-header {
+        border-bottom: @border;
+        > .btn {
+            float: right;
+            margin-top: 9px;
+            margin-right: 10px;
+            line-height: 18px;
+        }
+    }
+    .tab-nav {
+        display: inline-block;
+        > li {
+            display: inline-block;
+            > a {
+                display: block;
+                height: 50px;
+                padding: 8px 32px;
+                line-height: 30px;
+                font-size: 16px;
+                color: #888;
+                cursor: pointer;
+                border: 2px solid transparent;
+                &:hover {
+                    text-decoration: none;
+                    color: @primary;
+                }
+            }
+            &.active {
+                > a {
+                    color: @primary;
+                    border-bottom-color: @primary;
+                }
+            }
+        }
+    }
+    .tab-content {
+        padding: 10px 32px 20px;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #888;
+        background-color: #fff;
+        > div {
+            &:not(:first-child) {
+                display: none;
+            }
+        }
+        p {
+            margin-bottom: 16px;
+            text-indent: 2em;
+        }
+    }
+}
+.tab-vertical {
+    background-color: #ebf0f7;
+    display: flex;
+    align-items: stretch;
+    .tab-nav {
+        flex: 0 0 180px;
+        > li {
+            > a {
+                display: block;
+                height: 50px;
+                padding: 10px 26px;
+                line-height: 30px;
+                border-left: 4px solid transparent;
+                font-size: 16px;
+                color: #222;
+                transition: all .3s linear;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: none;
+                    color: @primary;
+                }
+            }
+            &.active > a {
+                border-left-color: @primary;
+                color: @primary;
+                background-color: #fff;
+            }
+        }
+    }
+    .tab-content {
+        flex: 1 1 auto;
+        background-color: #fff;
+        > div {
+            &:not(:first-child) {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,205 @@
+input,
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='file'],
+select,
+textarea {
+    width: 420px;
+    padding: 6px 8px;
+    // line-height: 24px;
+    border-radius: 0;
+    border: @border;
+    font-family: 'Arial';
+    font-size: 16px;
+    color: #bbb;
+    &:focus {
+        border-color: @primary;
+        box-shadow: none;
+        outline: none;
+        color: #888;
+    }
+    &[readonly='readonly'] {
+        border: none;
+        outline: none;
+        color: #bbb;
+        &:focus {
+            border: none;
+            outline: none;
+            color: #bbb;
+        }
+    }
+    &.error {
+        border-color: @danger;
+    }
+}
+input,
+select {
+    height: 40px;
+}
+.form-control {
+    position: relative;
+    float: left;
+    width: e('calc(100% - 200px)');
+    > span.error {
+        display: inline-block;
+        padding: 0 8px;
+        color: @danger;
+    }
+}
+.input-group {
+    position: relative;
+    display: inline-block;
+    > input {
+        padding-right: 40px;
+    }
+    &-addon {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        min-width: 40px;
+        height: 38px;
+        line-height: 32px;
+        text-align: center;
+        padding: 4px 8px;
+        background-color: #f5f5f5;
+        border-left: 1px solid #dcdcdc;
+        color: #969696;
+        font-size: 12px;
+    }
+}
+.input-validate-code {
+    > input {
+        width: 200px;
+    }
+}
+
+.radio-group {
+    > label > input {
+        display: none;
+    }
+    &:not(.btn-group) {
+        > label {
+            margin: 8px 32px 8px 0;
+            padding: 0 0 0 26px;
+            width: auto;
+            font-size: 16px;
+            color: #888;
+            text-align: left;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                margin-top: -8px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 1px solid #bbb;
+            }
+            &::after {
+                content: '';
+                position: absolute;
+                left: 4px;
+                top: 50%;
+                margin-top: -4px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #d2d2d2;
+            }
+            &.checked {
+                &::before {
+                    border-color: @primary;
+                }
+                &::after {
+                    background-color: @primary;
+                }
+            }
+        }
+    }
+}
+label.checkbox {
+    display: inline-block;
+    padding: 0 0 0 26px;
+    float: none;
+    width: auto!important;
+    font-size: 16px!important;
+    color: #888;
+    position: relative;
+    > input {
+        display: none;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -8px;
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        border: 1px solid #bbb;
+    }
+    &::after {
+        display: none;
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        margin-top: -7px;
+        width: 12px;
+        height: 8px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: transparent transparent #fff #fff;
+        transform: rotate(-45deg);
+    }
+    &.disabled {
+        &::before {
+            border: 1px solid #bbb;
+            background-color: #eee;
+        }
+    }
+    &.checked {
+        &::before {
+            background-color: @primary;
+            border: none;
+        }
+        &::after {
+            display: block;
+        }
+        &.disabled {
+            &::before {
+                background-color: #d2d2d2;
+                border: none;
+            }
+            &::after {
+                display: block;
+            }
+        }
+    }
+}
+.form-group {
+    margin: 20px 0;
+    .clearfix();
+    label.form-label {
+        display: block;
+        float: left;
+        width: 200px;           
+        padding: 8px 20px 8px 0;
+        font-size: 18px;
+        line-height: 24px;
+        white-space: nowrap;
+        text-align: right;
+        color: #222;
+        &.required {
+            &::before {
+                content: '*';
+                margin-right: 4px;
+                color: #f54743;
+            }
+        }
+    }
+}

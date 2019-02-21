@@ -1,0 +1,14 @@
+mixin modal(title, name, action='', size='md')
+    .modal.fade(data-name=`${name}`)
+        .modal-dailog
+            .modal-content(class=`modal-content-${size}`)
+                form(name=`${name}` method='post' action=`${action}` id=`${name}`)
+                    .modal-header
+                        | #{title}
+                        button.close.hide-modal(type='button')
+                            i.iconfont.icon-close
+                    .modal-body
+                        block
+                    .modal-footer
+                        button.btn.btn-primary.m-r-lg(type='submit') 提交
+                        button.btn.btn-default.hide-modal(type='reset') 取消

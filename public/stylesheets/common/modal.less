@@ -1,0 +1,72 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: fade(#000, 30%);
+    z-index: 9999;
+    &-dailog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    &-content {
+        width: 800px;
+        max-height: 100vh;
+        &-sm {
+            width: 500px;
+        }
+        > form {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            background-color: #fff;
+        }
+    }
+    &-header {
+        position: relative;
+        padding: 0 10px;
+        padding-top: 12px;
+        font-size: 24px;
+        font-weight: lighter;
+        line-height: 60px;
+        text-align: center;
+        color: #222;
+        .close {
+            position: absolute;
+            right: 0;
+            top: 12px;
+            width: 60px;
+            height: 60px;
+            color: #222;
+            text-align: center;
+            transition: color .3s linear;
+            &:hover {
+                color: #5b5b5b;
+            }
+            .iconfont {
+                font-size: 18px;
+                line-height: inherit;
+            }
+        }
+    }
+    &-body {
+        padding: 0 10px;
+        overflow: auto;
+        max-height: e('calc(100vh - 73px - 40px)');
+    }
+    &-footer {
+        padding: 16px 40px 40px 210px;
+        .modal-content-sm & {
+            padding-left: 40px;
+            text-align: center;
+            .m-r-lg {
+                margin-right: 20px;
+            }
+        }
+    }
+}

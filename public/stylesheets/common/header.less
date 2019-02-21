@@ -1,0 +1,145 @@
+.header {
+    @primary: #00ddfe;
+
+    background-color: @bg-header;
+    .has-banner & {
+        background: none;
+        border-bottom: 1px solid fade(#fff, 30%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99;
+    }
+    .container {
+        margin: 0 auto;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        @media (min-width: 1670px) {
+            width: 1670px;
+        }
+    }
+    .logo {
+        &-xuelangyun, &-zhongzhi {
+            margin-top: 4px;
+            .iconfont {
+                font-size: 34px;
+                &.icon-xuelangyun, &.icon-zhongzhi {
+                    color: #fff;
+                }
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        &-zhongzhi {
+            margin-bottom: -5px;
+        }
+    }
+    .nav {
+        margin: 0 32px;
+        flex: 1 1 auto;
+        display: flex;
+        li {
+            padding: 0 15px;
+            &.active {
+                a {
+                    color: @primary;
+                    border-bottom: 2px solid @primary;
+                }
+            }
+        }
+        a {
+            display: block;
+            padding: 14px 10px 12px;
+            font-size: 16px;
+            line-height: 24px;
+            color: @nav-color;
+            transition: color .3s linear;
+            &:hover {
+                color: @nav-color-hover;
+                text-decoration: none;
+            }
+        }
+    }
+    .login, .register {
+        font-size: 16px;
+        color: @nav-color;
+        transition: color .3s linear;
+        &:hover {
+            color: @nav-color-hover;
+            text-decoration: none;
+        }
+    }
+    .login {        
+        margin-right: 40px;
+    }
+    .user {
+        &-view {
+            display: flex;
+            align-items: center;
+        }
+        &-suggestion {
+            color: #fff;
+            cursor: pointer;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        &-avatar {
+            width: 100px;
+            height: 50px;
+            position: relative;
+            .user-photo {
+                margin: 9px auto;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                overflow: hidden;
+                text-align: center;
+                cursor: pointer;
+                > img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            > ul {
+                display: none;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                margin-top: 1px;
+                padding: 5px 0;
+                background-color: #2b2b32;
+                > li > a {
+                    display: block;
+                    padding: 5px 15px;
+                    line-height: 20px;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #fff;
+                    &:hover {
+                        text-decoration: none;
+                        background-color: @primary;
+                    }
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 50px;
+                    bottom: 100%;
+                    margin-left: -5px;
+                    width: 10px;
+                    height: 16px;
+                    border-style: solid;
+                    border-width: 8px 5px;
+                    border-color: transparent;
+                    border-bottom-color: #2b2b32;
+                }
+            }
+        }
+    }
+}

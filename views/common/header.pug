@@ -1,0 +1,27 @@
+.header
+    .container
+        a.logo-xuelangyun(href=`${home}`)
+            i.iconfont.icon-logo
+            i.iconfont.icon-xuelangyun
+        a.logo-zhongzhi(href='/')
+            i.iconfont.icon-zhongzhi
+
+        ul.nav
+            each item in nav
+                li(class=`${item.url === active ? 'active' : null}`)
+                    a(href=item.url)= item.name
+
+        .user-view
+            if user
+                a.user-suggestion.show-modal(data-target='suggestion') 意见反馈
+                .user-avatar
+                    .user-photo
+                        img(src='/images/user-photo.jpg' alt=`${user.name}`)
+                    ul
+                        li
+                            a(href='/user') 个人中心
+                        li
+                            a(href=`${home}/login?back=${currentUrl}`) 退出登录
+            else
+                a.login(href=`${home}/login?back=${currentUrl}`) 登录
+                a.register(href=`${home}/register`) 注册

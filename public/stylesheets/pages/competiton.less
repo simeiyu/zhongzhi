@@ -1,0 +1,440 @@
+.companel {
+    margin-bottom: 40px;
+    border: @border;
+    >a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    ul {
+        display: flex;
+        align-items: stretch;
+    }
+    &-img {
+        flex: 0 0 366px;
+        padding: 8px;
+        width: 366px;
+        height: 246px;
+        >img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &-info {
+        padding: 8px 20px 8px 12px;
+        @media (min-width: 1200px) {
+            padding-right: 40px;
+        }
+        >h5 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: @text-title;
+            &+p {
+                font-size: 16px;
+                color: @text-disabled;
+                line-height: 1.5;
+                height: e('calc(230px - 74px - 54px - 32px)');
+            }
+        }
+        .investors {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: lighter;
+            color: @text-title;
+            padding: 10px 0 5px;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 110px;
+                height: 1px;
+                background-color: #a0a0a0;
+            }
+            span {
+                &:not(:first-child) {
+                    &::before {
+                        content: '×';
+                        margin: 0 4px;
+                    }
+                }
+            }
+            &+span {
+                font-size: 16px;
+                color: @text-disabled;
+            }
+        }
+    }
+    &-bonus {
+        flex: 0 0 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 8px 16px;
+        >span {
+            display: block;
+            padding-left: 12px;
+            color: @text-body;
+            font-size: 16px;
+        }
+        >b {
+            display: block;
+            font-size: 30px;
+            font-style: italic;
+            .text-gradient(left);
+        }
+    }
+    &-status {
+        margin: -1px -1px -1px 0;
+        flex: 0 0 40px;
+        padding: 8px;
+        color: #fff;
+        font-size: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &.on {
+            .linear_gradient(top);
+        }
+        &.off {
+            background-color: @disabled;
+        }
+    }
+}
+.counter {
+    counter-reset: li 0;
+    > li {
+        counter-increment: li;
+        margin: 8px 0;
+        &::before {
+            content: counter(li) '、';
+            margin-right: 4px;
+        }
+    }
+}
+.reward {
+    > dd {
+        line-height: 40px;
+    }
+    .text-linear {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: normal;
+        font-style: italic;
+        padding-right: 24px;
+    }
+}
+.sponsor {
+    margin: 30px 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    > li {
+        width: 380px;
+        height: 150px;
+        border: @border;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > img {
+            max-width: 100%;
+            height: auto;;
+        }
+    }
+}
+
+.btn-upload {
+    position: relative;
+    display: block;
+    margin: 32px auto;
+    width: 180px;
+    height: 40px;
+    .linear_gradient(left);
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
+    line-height: 40px;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+    }
+    > input {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 8;
+        display: block;
+        width: 100%;
+        opacity: 0;
+    }
+}
+#ranking {
+    padding-bottom: 20px;
+}
+#ranking form[name='rankingData'] {
+    input[name='tab'] {
+        display: none;
+    }
+    .btn-group label {
+        font-size: 16px;
+    }
+}
+/* 排行榜 */
+.ranking-best {
+    @second-org-bg: #ccced4;
+    @second-org-color: #7a7b7f;
+    @second-circle: #dddfe5;
+    @second-circle-color: #ababab;
+
+    @first-org-bg: #e4d798;
+    @first-org-color: #867c4e;
+    @first-circle: #eee1a5;
+    @first-circle-color: #b0a56a;
+
+    @third-org-bg: #c19a83;
+    @third-org-color: #6e5545;
+    @third-circle: #e1baa2;
+    @third-circle-color: #d3aa91;
+
+    @text-color: #222;
+
+    margin: 0 auto 32px;
+    max-width: 900px;
+    height: 350px;
+    display: flex;
+    align-items: stretch;
+    font-weight: normal;
+    > div {
+        flex: 1 1 100% / 3;
+        position: relative;
+        &.first {
+            background: url(../images/ranking-bg-1.png) left bottom / 100% auto no-repeat;
+            .org {
+                background-color: @first-org-bg;
+                color: @first-org-color;
+                bottom: 55px;
+            }
+            .mark {
+                margin-left: -50px;
+                top: 20px;
+                border-color: @first-circle;
+                color: @first-circle-color;
+            }
+            .ranking {
+                background-color: @first-circle;
+            }
+            .user {
+                bottom: 180px;
+                padding: 0 20px;
+            }
+        }
+        &.second {
+            background: url(../images/ranking-bg-2.png) left bottom / 100% auto no-repeat;
+            .org {
+                background-color: @second-org-bg;
+                color: @second-org-color;
+                bottom: 35px;
+            }
+            .mark {
+                margin-left: -30px;
+                top: 50px;
+                border-color: @second-circle;
+                color: @second-circle-color;
+            }
+            .ranking {
+                background-color: @second-circle;
+            }
+            .user {
+                bottom: 150px;
+                padding-left: 30px;
+            }
+        }
+        &.third {
+            background: url(../images/ranking-bg-3.png) left bottom / 100% auto no-repeat;
+            .org {
+                background-color: @third-org-bg;
+                color: @third-org-color;
+                bottom: 23px;
+            }
+            .mark {
+                margin-left: -70px;
+                top: 74px;
+                border-color: @third-circle;
+                color: @third-circle-color;
+            }
+            .ranking {
+                background-color: @third-circle;
+            }
+            .user {
+                bottom: 120px;
+                padding-right: 40px;
+            }
+        }
+        .org {
+            position: absolute;
+            left: (100% - (180 / 300 * 100%)) / 2;
+            width: 180 / 300 * 100%;
+            height: 30px;
+            border-radius: 30px;
+            line-height: 30px;
+            padding: 0 24px;
+            white-space: nowrap;
+            font-size: 18px;
+            text-align: center;
+        }
+        .mark {
+            position: absolute;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid;
+            padding: 30px 5px;
+            font-size: 20px;
+            line-height: 2;
+            text-align: center;
+            .ranking {
+                position: absolute;
+                left: 50%;
+                bottom: -15px;
+                margin-left: -15px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                font-size: 18px;
+                color: @text-color;
+                line-height: 30px;
+            }
+        }
+        .user {
+            position: absolute;
+            width: 100%;
+            color: @text-color;
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+}
+.ranking-table {
+    margin-top: 40px;
+    width: 100%;
+    border-collapse: collapse;
+    th {
+        font-size: 18px;
+        font-weight: normal;
+        color: @text-title;
+        padding: 12px;
+        text-align: left;
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            width: 150px;
+        }
+    }
+    td {
+        padding: 12px;
+        font-size: 16px;
+        text-align: left;
+        color: #888;
+        border-bottom: @border;
+    }
+}
+
+.ranking-score {
+    .clearfix();
+    &-item {
+        width: 50%;
+        float: left;
+        padding-right: 40px;
+        margin: 20px 0;
+    }
+    &-header {
+        padding-bottom: 32px;
+    }
+    &-body {
+        margin-left: 5px;
+        width: 330px;
+        height: 130px;
+        border-left: @border;
+        border-left-style: dashed;
+        position: relative;
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            left: -7px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid @bg-blue;
+        }
+        &::before {
+            top: -14px;
+        }
+        &::after {
+            bottom: -14px;
+        }
+        > ul {
+            > li {
+                display: inline-block;
+                padding-left: 22px;
+                font-size: 18px;
+                color: #222;
+                line-height: 1.8;
+                > span {
+                    font-size: 16px;
+                    color: #888;
+                }
+            }
+            &::after {
+                display: block;
+                content: '暂无更多数据';
+                margin-top: 70px;
+                padding-left: 22px;
+                font-size: 16px;
+                color: #888;
+            }
+        }
+    }
+    &-title {
+        display: inline-block;
+        font-size: 24px;
+        font-weight: normal;
+        color: #222;
+        padding-right: 16px;
+    }
+    &-status {
+        display: inline-block;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: lighter;
+        color: #222;
+        background-color: #eee;
+        &.on {
+            color: #fff;
+            background-color: @primary;
+        }
+    }
+    
+}
+
+.competition {
+    .btn-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: -20px;
+        margin-top: 20px;
+    }
+}
+form[name='signUp'] {
+    a {
+        font-size: 16px;
+    }
+}

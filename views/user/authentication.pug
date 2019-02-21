@@ -1,0 +1,57 @@
+.user-authentic
+    - certicResult = certificationStatus == 2 ? '认证失败' : '认证成功'
+    ul.user-authentic-header
+        li(class=`${certificationStatus == 0 ? 'active' : ''}`) 1. 提交认证信息
+        li(class=`${certificationStatus == 1 ? 'active' : ''}`) 2. 等待认证
+        li(class=`${certificationStatus > 1 ? 'active' : ''}`)
+            | 3. 
+            | #{certicResult}
+    if !certificationStatus
+        .user-authentic-info 以下所有提交的信息雪浪数制均会妥善保管,不会用于其他商业用途或传输给第三方。
+        form(name='certification' id='certification' enctype="multipart/form-data" method='POST')
+            .form-group
+                label.form-label.required 姓名 
+                .form-control
+                    input(id='name' name='name' placeholder='请输入您的真实姓名' required)
+                    .form-warning
+                        | 请保证与您身份证上的名字一致，否则可能会认证失败。
+            .form-group
+                label.form-label.required 身份证号
+                .form-control
+                    input(id='idCardNo' name='idCardNo' placeholder='请输入您的身份证号' required)
+                    .form-warning
+                        | 请输入正确的身份证号，否则可能会认证失败。
+            .form-group
+                label.form-label.required 身份正面
+                .form-control
+                    .file-upload.idCardFrontFile
+                        input(type='file' id='idCardFrontFile' name='idCardFrontFile' placeholder='上传' accept="image.jpg,image.png,image.bmp" required)
+                        span 上传
+                    .form-warning
+                        p 1. 请上传身份证原件正面的照片，保证文字清晰
+                        p 2. 支持png，jpg或bmp，尺寸不小于280px * 208px，大小不超过10MB。
+
+            .form-group
+                label.form-label.required 身份反面
+                .form-control
+                    .file-upload.idCardBackFile
+                        input(type='file' id='idCardBackFile' name='idCardBackFile' placeholder='上传' accept="image.jpg,image.png,image.bmp" required)
+                        span 上传
+                    .form-warning
+                        p 1. 请上传身份证原件反面的照片，保证文字清晰
+                        p 2. 支持png，jpg或bmp，尺寸不小于280px * 208px，大小不超过10MB。
+            .form-group.form-btns
+                button(type='submit').btn.btn-primary 提交审核
+
+    if certificationStatus == 1
+        .user-authentic-status
+            h5.message 您已成功提交认证信息，正在审核中。
+            p.info 如果认证通过，我们将通过邮件告知，请耐心等待。
+    if certificationStatus == 2
+        .user-authentic-status
+            h5.message.failuer 审核失败
+            p.info 您的认证未通过，我们已发邮件至您邮箱，告知失败原因。
+    if certificationStatus == 3
+        .user-authentic-status
+            h5.message.success 审核成功
+            p.info 您的认证已经通过审核。

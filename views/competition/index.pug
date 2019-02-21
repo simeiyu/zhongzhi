@@ -1,0 +1,62 @@
+.main.competition
+    .banner
+        .banner-info
+            h3= banner.heading
+            h5= banner.subheading
+        
+    .container
+        .heading_1
+            h4.heading
+                | 挑战赛
+                |
+                br
+                small.subheading
+                    i.iconfont.icon-challenge
+
+        each item in challenge
+            .companel
+                a(href=`competition/challenge/${item.id}`)
+                    ul
+                        li.companel-img
+                            img(src=`/images/competition/challenge-${item.id}.jpg`)
+                        li.companel-info
+                            h5= item.name
+                            - const description = item.context.profile[item.context.profile.length - 1].slice(0, 54) + '...'
+                            p= description
+                            p.investors
+                                each investor in item.investors
+                                    span= investor.name
+                            span= `更新日期：${item.updateTime}`
+                        li.companel-bonus
+                            span 奖励
+                            b= item.bonus
+                        - const status = item.status == 'on' ? '进行中' : '已结束'
+                        li.companel-status(class=`${item.status}`)= status
+        
+        .heading_1
+            h4.heading
+                | 练习赛
+                |
+                br
+                small.subheading
+                    i.iconfont.icon-practice
+                    
+        each item in practice            
+            .companel
+                a(href=`competition/practice/${item.id}`)
+                    ul
+                        li.companel-img
+                            img(src=`/images/competition/practice-${item.id}.jpg`)
+                        li.companel-info
+                            h5= item.name
+                            - const description = item.context.profile[item.context.profile.length - 1].slice(0, 54) + '...'
+                            p= description
+                            p.investors
+                                each investor in item.investors
+                                    span= investor.name
+                            span= `更新日期：${item.updateTime}`
+                        li.companel-bonus
+                            span 奖励
+                            b= item.bonus
+                        - const status = item.status == 'on' ? '进行中' : '已结束'
+                        li.companel-status(class=`${item.status}`)= status

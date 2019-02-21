@@ -1,0 +1,78 @@
+extends ../common/layout
+
+block content
+    .main.ai-market
+        .container
+            .profile
+                .img
+                    img(src=`/images/ai-market/detail-${id}.jpg`)
+                .info
+                    h3.title= name
+                    p.desc= description
+                    ul
+                        li
+                            | 交付方式：
+                            | #{deliver}
+                        li
+                            span 价格：
+                            span.price= price
+            .tab.tab-simple
+                .tab-header
+                    ul.tab-nav
+                        li.active
+                            a(data-target='introduction') 服务介绍
+                        li
+                            a(data-target='scene') 使用场景
+                        li
+                            a(data-target='cases') 合作案例
+                    if user
+                        button.btn.btn-primary.show-modal(data-target='consult') 立即咨询
+                .tab-content
+                    #introduction
+                        each item in introduction
+                            p= item
+                    #scene
+                        each item in scene
+                            p= item
+                    #cases
+                        each item in cases
+                            p= item
+
+    include ../common/modal
+    +modal('咨询登记', 'consult', '/consult')
+        .form-group
+            label.form-label 服务名称
+            .form-control
+                input(type='text' name='serviceName' readonly="readonly" value=`${name}`)
+        .form-group
+            label.form-label.required 问题标题
+            .form-control
+                input(type='text' name='issueTitle' placeholder='请一句话描述您的问题' required)
+        .form-group
+            label.form-label.required 具体描述
+            textarea(placeholder='请详细描述您的问题' name="issueDesc" rows="3" required)
+        .form-group
+            label.form-label 企业名称
+            .form-control
+                input(type='text' name='companyName' placeholder='请输入企业名称')
+        .form-group
+            label.form-label 联系人
+            .form-control
+                input(name='linkman' placeholder='请输入联系人')
+        .form-group
+            label.form-label.required 联系手机
+            .form-control
+                input(name='phone' placeholder='请输入联系手机')
+        .form-group
+            label.form-label.required 验证码
+            .form-control
+                .input-validate-code
+                    input(type='text' name='verify' placeholder='请输入验证码' required)
+                    .verify
+                        img(src=`${verifyUrl}`)
+
+    
+block localScripts
+    script(src='/js/validate/jquery.validate.min.js')  
+    script(src='/js/validate/localization/messages_zh.js')  
+    script(src='/js/form-validate.js')

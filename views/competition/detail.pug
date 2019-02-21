@@ -1,0 +1,266 @@
+extends ../common/layout
+
+block content
+    .main.competition
+        .banner
+            .banner-info
+                h3= banner.heading
+                h5= banner.subheading
+                if !user && status == 'on'
+                    a.btn-signup(href=`${home}/login?back=${currentUrl}`) 立即报名
+                else if !isApplied && status == 'on'
+                    a.btn-signup.show-modal(data-target='signUp') 立即报名
+        .container
+            .timeline
+                .timeline-bg(class=`${timeline.cross == 100 ? 'ended' : ''}`)
+                .timeline-cross(style=`width: ${timeline.cross}%` class=`${timeline.cross == 0 || timeline.cross == 100 ? 'noContent' : ''}`)
+                span.timeline-start= timeline.start
+                if timeline.cross > 20 && timeline.cross < 80
+                    span.timeline-today(style=`left: ${timeline.cross}%`)= timeline.today
+                span.timeline-end= timeline.end
+            .tab.tab-gradient
+                ul.tab-nav
+                    li.active
+                        .tab-nav-decoration-1
+                        .tab-nav-decoration-2
+                        a(data-target='context') 背景
+                    li
+                        .tab-nav-decoration-1
+                        .tab-nav-decoration-2
+                        a(data-target='task') 任务
+                    if user && isApplied
+                        li
+                            .tab-nav-decoration-1
+                            .tab-nav-decoration-2
+                            a(data-target='submited') 提交结果
+                    //- if user && isApplied && submitedFiles.length > 0
+                    li
+                        .tab-nav-decoration-1
+                        .tab-nav-decoration-2
+                        a(data-target='ranking') 排行榜
+                .tab-content
+                    #context
+                        .heading_1
+                            h5.heading
+                                | 简介
+                                br
+                                small.subheading
+                                    i.iconfont.icon-profile
+                        each paragraph in context.profile
+                            p= paragraph
+                        
+                        .heading_1
+                            h5.heading
+                                | 规则
+                                br
+                                small.subheading
+                                    i.iconfont.icon-rule
+                        ul.counter
+                            each rule in context.rules
+                                li= rule
+                        
+                        .heading_1
+                            h5.heading
+                                | 奖励
+                                br
+                                small.subheading
+                                    i.iconfont.icon-reward
+                        dl.reward
+                            dt 最高得分者获得奖金，并根据准确率对应不同的数额：
+                            each level in context.reward
+                                dd
+                                    | 准确率 
+                                    | #{level.accuracy}
+                                    | ，奖金
+                                    span.text-linear= level.bonus
+                            dd.footnote 注：奖金为含税金额，实际发放以税后金额为准。
+                        
+                        .heading_1
+                            h5.heading
+                                | 主办单位
+                                br
+                                small.subheading
+                                    i.iconfont.icon-sponsor
+                        ul.sponsor
+                            each investor in investors
+                                li
+                                    img(src=`/images/competition/sponsor/${investor.img}` alt=investor.name)
+                    #task
+                        .heading_1
+                            h5.heading
+                                | 数据下载
+                                br
+                                small.subheading
+                                    i.iconfont.icon-data-download
+                        table.table
+                            tr
+                                th 文件名称
+                                th 文件大小
+                            each item in data
+                                tr
+                                    td= item.name
+                                    td
+                                        | #{item.size}
+                                        |
+                                        if isApplied
+                                            a.download(download='download' href=`${item.download}`)
+                                                i.iconfont.icon-download
+                        span.footnote 注：报名参赛后，可获取数据下载权限。
+
+                        .heading_1
+                            h5.heading
+                                | 任务描述
+                                br
+                                small.subheading
+                                    i.iconfont.icon-task-description
+                        p= task.description
+                        
+                        .heading_1
+                            h5.heading
+                                | 数据说明
+                                br
+                                small.subheading
+                                    i.iconfont.icon-data-description
+                        p= task.dataDescription
+                    if user && isApplied
+                        #submited
+                            if submitedFiles.length > 0
+                                table.table.m-t-lg
+                                    tr
+                                        th 提交结果
+                                        th 提交时间
+
+                                    each item in submitedFiles
+                                        tr
+                                            td= item.fileName
+                                            td= item.submitTime
+                                span.footnote 注： 点击，打开文件选择弹窗，选择本地文件
+                            else
+                                .no-upload
+                                    img(src='/images/no-upload.svg', alt='暂无提交结果')
+                                    if status == 'on'
+                                        span 当前暂无提交结果
+                                    else
+                                        span 比赛已结束，您没有提交任何结果
+
+                            if status == 'on'
+                                form(name='competition-upload' enctype='multipart/form-data' method='POST')
+                                    a.btn-upload.competition-upload
+                                        | 提交结果
+                                        input(type='file' name='file')
+     
+                    #ranking
+                        form(name='rankingData' method='get' action=`${action}`)
+                            input(type='text' name='tab' value='ranking')
+                            .radio-group.btn-group
+                                each item in sections
+                                    label(class=`${item.id == rankingSection ? 'checked' : ''}`)
+                                        input(type='radio' name='section' value=`${item.id}`)
+                                        | #{item.name}
+                                if user && isApplied && submitedFiles.length > 0
+                                    label(class=`${'0' == rankingSection ? 'checked' : ''}`)
+                                            input(type='radio' name='section' value='0')
+                                            | 我的成绩
+                            if rankingSection > 0
+                                if rankingData.list.length > 0
+                                    if rankingData.pageNum == 1
+                                        .ranking-best
+                                            - const second = rankingData.list[1]
+                                            - const first = rankingData.list[0]
+                                            - const third = rankingData.list[2]
+                                            .second
+                                                if second
+                                                    .mark
+                                                        | #{second.score}
+                                                        .ranking= second.currentRank
+                                                    .user= second.userName
+                                                    .org= second.orgName
+                                            .first
+                                                if first
+                                                    .mark
+                                                        | #{first.score}
+                                                        .ranking= first.currentRank
+                                                    .user= first.userName
+                                                    .org= first.orgName
+                                            .third
+                                                if third
+                                                    .mark
+                                                        | #{third.score}
+                                                        .ranking= third.currentRank
+                                                    .user= third.userName
+                                                    .org= third.orgName
+                                                    
+                                    table.ranking-table
+                                        tr
+                                            th 排名
+                                            th 参赛者
+                                            th 所在组织
+                                            th 分数
+                                            th 最优成绩提交日
+                                        
+                                        each item in rankingData.list
+                                            tr
+                                                td= item.currentRank
+                                                td= item.userName
+                                                td= item.orgName
+                                                td= item.score
+                                                td= item.date
+                                
+                                else
+                                    span 暂无数据
+
+                                if rankingData.pages > 1
+                                    .radio-group.pagination
+                                        label.prev(class=`${rankingData.isFirstPage ? 'disabled' : ''}`)
+                                            input(type='radio' name='pageNo' value=`${rankingData.prePage}` disabled=rankingData.isFirstPage)
+                                            i.iconfont.icon-left
+                                        each item in rankingData.navigatepageNums
+                                            label(class=`${item == rankingData.pageNum ? 'active' : ''}`)
+                                                input(type='radio' name='pageNo' value=`${item}`)
+                                                | #{item}
+                                        label.next(class=`${rankingData.isLastPage ? 'disabled' : ''}`)
+                                            input(type='radio' name='pageNo' value=`${rankingData.nextPage}`)
+                                            i.iconfont.icon-right
+                            else
+                                if myScore.length > 0
+                                    .ranking-score
+                                        each item in myScore
+                                            .ranking-score-item
+                                                .ranking-score-header
+                                                    -
+                                                        let scoreTitle = '比赛'
+                                                        sections.forEach(s => {
+                                                            if (s.id == item.section) scoreTitle = s.name
+                                                        })
+                                                        let scoreStatus = section == item.section && status == 'on' ? true : false
+                                                    h3.ranking-score-title= scoreTitle
+                                                    span.ranking-score-status(class=`${scoreStatus ? 'on' : 'off'}`)
+                                                        | #{ scoreStatus ? '进行中' : '已结束' }
+                                                .ranking-score-body
+                                                    ul
+                                                        li
+                                                            | 日期：
+                                                            span.ranking-score-value= item.time
+                                                        li
+                                                            | 排名：
+                                                            span.ranking-score-value= item.rank
+                                                        li
+                                                            | score：
+                                                            span.ranking-score-value= item.score
+                                                
+                                else
+                                    span 尚无成绩
+        
+    include ../common/modal
+    +modal('报名', 'signUp', action, 'sm')
+        .form-group.text-center
+            input(type='text' name='id' value=`${id}` style='display: none;')
+            label.checkbox
+                input(type='checkbox' checked='checked' name='agree')
+                | 我已阅读并同意
+            a(href='#' target='_blank') 比赛协议
+
+block localScripts
+    script(src='/js/validate/jquery.validate.min.js')  
+    script(src='/js/validate/localization/messages_zh.js')  
+    script(src='/js/form-validate.js')

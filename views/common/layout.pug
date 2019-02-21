@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    block localStyles
+    link(rel='shortcut icon', href='/images/xuelanglog.png')
+    link(rel='stylesheet', href='/stylesheets/styles.css')
+  - const classes = banner ? 'has-banner' : ''
+  body(class=`${classes}`)
+    include header.pug
+    block content
+    include footer.pug
+
+    if user
+      include modal
+      +modal('意见反馈', 'suggestion')
+          .form-group
+              label.form-label.required 问题和建议
+              .form-control
+                textarea(name="content" rows="6" required)
+
+    script(src='/js/jquery/jquery.js')
+
+    block localScripts
+
+    script(src='/js/zhongzhi.js')

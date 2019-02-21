@@ -1,0 +1,4 @@
+mixin toaster(status, msg)
+    .toaster(class=`toaster-${status}`)
+        i.iconfont(class=`icon-${status}`)
+        span= msg

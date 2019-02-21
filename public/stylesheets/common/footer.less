@@ -1,0 +1,87 @@
+@footer-bg: #383d41;
+@footer-color: #aeb9c2;
+@footer-right-width: e('calc(100% - 200px)');
+@footer-right-color: #8e9397;
+@footer-border: 1px solid #4a4f53;
+.footer {
+    background-color: @footer-bg;
+    padding-top: 40px;
+    color: @footer-color;
+    font-size: 12px;
+    .container:first-child {
+        display: flex;
+    }
+    .left {
+        margin-bottom: 30px;
+        padding-left: 60px;
+        padding-right: 20px;
+        line-height: 1.8;
+        border-right: @footer-border;
+        position: relative;
+        > .iconfont {
+            position: absolute;
+            font-size: 20px;
+            top: -8px;
+            left: 16px;
+        }
+    }
+    .hotline {
+        color: #fff;
+        b {
+            display: block;
+            font-weight: normal;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+    }
+    .right {
+        flex: 1 1 @footer-right-width;
+        padding-left: 30px;
+        margin-bottom: 30px;
+        .nav {
+            margin-bottom: 12px;
+            padding-bottom: 20px;
+            border-bottom: @footer-border;
+            li {
+                display: inline-block;
+                &:not(:first-child) {
+                    margin-left: 30px;
+                }
+            }
+            a {
+                color: @footer-right-color;
+            }
+        }
+        .touchUs {
+            display: inline-block;
+            line-height: 1.8;
+            dt {
+                margin-bottom: 4px;
+                color: #fff;
+            }
+            dd .iconfont {
+                margin-right: 8px;
+                font-size: 14px;
+                line-height: 1;
+            }
+            & + p {
+                float: right;
+                margin: 0 30px;
+                text-align: center;
+                img {
+                    display: block;
+                    margin-top: 8px;
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+        }
+    }
+    .copyright {
+        border-top: @footer-border;
+        padding: 8px 32px;
+        color: @footer-right-color;
+        text-align: center;
+        line-height: 2;
+    }
+}

@@ -1,0 +1,46 @@
+.help {
+    margin-bottom: 80px;
+    .tab-content > div > ul {
+        padding: 8px 30px;
+        line-height: 1.5;
+        > li {
+            margin: 12px 0;
+            color: #222;
+            font-size: 16px;
+            > ul {
+                margin-bottom: 16px;
+                > li {
+                    font-size: 15px;
+                    margin: 12px 0;
+                    color: #888;
+                }
+            }
+        }
+    }
+    p {
+        margin: 12px 0 16px;
+        font-size: 15px;
+        color: #888;
+    }
+}
+
+.increment-question {
+    counter-reset: li 0;
+    > li {
+        counter-increment: li;
+        &::before {
+            content: 'Q'counter(li)':';
+            margin-right: 4px;
+        }
+    }
+}
+.increment-digit {
+    counter-reset: li 0;
+    > li {
+        counter-increment: li;
+        &::before {
+            content: counter(li)'）';
+            margin-right: 4px;
+        }
+    }
+}

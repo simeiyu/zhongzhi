@@ -1,0 +1,19 @@
+mixin my_competitions(title, type, list)
+    h4.title= title
+    if list.length
+        ul
+            each item in list
+                li
+                    a.user-competition(href=`/competition/${type}/${item.id}`)
+                        .img
+                            img(src=`/images/competition/${type}-${item.id}.jpg` alt=`${item.name}`)
+                        h5.name= item.name
+                        - const status = item.status == 'on' ? '进行中' : '已结束'
+                        span.status(class=`${item.status}`)= status
+    else
+        - const info = `当前没有参加的${title}`
+        p= info
+
+.user-competitions
+    +my_competitions('挑战赛', 'challenge', challenge)
+    +my_competitions('练习赛', 'practice', practice)

@@ -1,0 +1,35 @@
+extends ../common/layout
+
+block localStyles
+    link(rel="stylesheet" media="all" type="text/css" href="/js/jquery/jquery-ui.min.css")
+
+block content
+    .user-center
+        .container
+            ul.breadcrumbs
+                li
+                    a(href='/') 首页
+                li 个人中心
+            .tab.tab-vertical
+                ul.tab-nav
+                    li.active
+                        a(data-target='competitions') 我的比赛
+                    li
+                        a(data-target='user_info') 个人信息
+                    li
+                        a(data-target='authentication') 实名认证
+                .tab-content
+                    #competitions
+                        include competitions.pug
+                    #user_info
+                        include user_info.pug
+                    #authentication
+                        include authentication.pug
+
+block localScripts
+    script(type="text/javascript" src="/js/jquery/jquery-ui.min.js")
+    script(src='/js/validate/jquery.validate.min.js')  
+    script(src='/js/validate/localization/messages_zh.js')  
+    script(type="text/javascript" src="/js/jquery/jquery-ui-datepicker-zh-CN.js")
+    script(src='/js/form-validate.js')
+    script(type="text/javascript" src="/js/datePicker.js")

@@ -1,0 +1,208 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif';
+    font-size: 14px;
+    font-weight: normal;
+    color: #5b5b5b;
+    background-color: #f2f5fa;
+    &.has-banner {
+        background-color: #fff;
+    }
+}
+
+ol,
+ul {
+    list-style-type: none;
+}
+
+image {
+    outline: none;
+    border: none;
+    width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #00c1de;
+    &:hover {
+        text-decoration: underline;
+    }
+    &:focus {
+        color: #0ea3bb;
+    }
+}
+.clearfix {
+    &::after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        font-size:0;
+    }
+}
+
+button {
+    outline: none;
+    border: none;
+    background: none;
+    box-shadow: none;
+    &:focus {
+        outline: none;
+        border: none;
+    }
+}
+
+.fade {
+    display: none;
+    opacity: 0;
+}
+
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+
+.linear_gradient(@dir) {
+    background: -moz-linear-gradient(@dir, @bg-green, @bg-blue);
+    background: -webkit-linear-gradient(@dir, @bg-green, @bg-blue);
+    background: -o-linear-gradient(@dir, @bg-green, @bg-blue);
+    background: linear-gradient(@dir, @bg-green, @bg-blue);
+}
+
+.text-gradient(@dir) {
+    .linear_gradient(@dir);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.border-gradient(@dir, @border-width: 2px, @border-style: solid) {
+    border: @border-width @border-style;
+    border-image: -moz-linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
+    border-image: -webkit-linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
+    border-image: -o-linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
+    border-image: linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
+}
+.text-linear {
+    .text-gradient(left);
+}
+.text-red {
+    color: @danger;
+}
+.footnote {
+    font-size: 16px;
+    font-weight: normal;
+    &::before {
+        content: '*';
+        margin-right: 4px;
+    }
+    .text-red();
+}
+
+.table {
+    width: 100%;
+    border: @border;
+    border-collapse: collapse;
+    th {
+        font-size: 18px;
+        padding: 4px 16px;
+        background-color: #f6f6f6;
+        color: @text-title;
+        font-weight: normal;
+        text-align: left;
+    }
+    td {
+        padding: 4px 16px;
+        border-top: @border;
+        font-size: 16px;
+        color: #888;
+    }
+    .download {
+        float: right;
+        .text-gradient(top);
+    }
+}
+.m-t-lg {
+    margin-top: 40px;
+}
+.m-r-lg {
+    margin-right: 40px;
+}
+
+.no-upload {
+    margin: 48px auto;
+    max-width: 240px;
+    text-align: center;
+    > img {
+        width: 100%;
+        height: auto;
+        opacity: .5;
+    }
+    > span {
+        font-size: 16px;
+        font-weight: normal;
+    }
+}
+
+.pagination {
+    margin-top: 8px;
+    float: right;
+    // list-style: none;
+    // text-align: right;
+    .clearfix();
+    &.radio-group > label {
+        margin: 0 0 0 8px!important;
+        padding: 4px!important;
+        &::before, &::after {
+            display: none;
+        }
+        > input {
+            display: none;
+        }
+    }
+    > button, &.radio-group > label {
+        display: block;
+        float: left;
+        border: @border;
+        width: 30px!important;
+        height: 30px;
+        border-radius: 5px;
+        color: #888;
+        line-height: 20px;
+        padding: 4px;
+        text-align: center!important;
+        transition: all .3s linear;
+        cursor: pointer;
+        margin-left: 8px;
+        font-size: 14px;
+        font-weight: normal;
+        &[disabled] {
+            background-color: @disabled;
+            color: #fff;
+            cursor: not-allowed;
+        }
+        &:not([disabled]), &.disabled {
+            &:hover {
+                border-color: @bg-blue;
+                text-decoration: none;
+            }
+        }
+        &.active {
+            .linear_gradient(top);
+            color: #fff;
+            border: none;
+            padding: 5px;
+        }
+    }
+}

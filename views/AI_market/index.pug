@@ -1,0 +1,164 @@
+extends ../common/layout
+
+block content
+    .main.ai-market
+        .banner
+            .banner-info
+                h3= banner.heading
+                h5= banner.subheading
+        .container
+            form(name='search' id='search' method='GET')
+                .search-wrapper
+                    .search
+                            input(type='text' autocomplete='off' name='keyword' placeholder='请输入您需要的服务' value=`${keyword || ''}`)
+                            button(type='submit').btn-search 搜索
+                    if user
+                        .issue
+                            button(type='button' data-target='checkIn').btn.btn-primary.show-modal 发布需求
+                .classify
+                    each item in tagList
+                        dl
+                            dt= item.title
+                            each tag in item.labels
+                                dd
+                                    label(class=`${tag.checked ? 'checked' : ''}`)
+                                        |
+                                        input(type='checkbox' name='labels' checked=tag.checked value=`${tag.id}`)
+                                        | #{tag.name}
+                .list-header
+                    .radio-group.btn-group
+                        label(class=`${sorted == 0 ? 'checked' : ''}`)
+                            - checked = sorted == 0
+                            input(type='radio' name='sort' checked=checked value='0')
+                            | 默认排序
+                        //- label(class=`${sorted == 1 ? 'checked' : ''}`)
+                        //-     - checked = sorted == 1
+                        //-     input(type='radio' name='sort' checked=checked value='1')
+                        //-     | 发布时间
+                        label(class=`${sorted == 2 ? 'checked' : ''}`)
+                            - checked = sorted == 2
+                            input(type='radio' name='sort' checked=checked value='2')
+                            | 价格
+                            i.iconfont.icon-xiangxia
+
+                    - const total = serviceList.length
+                    span.list-total
+                        | 一共
+                        | #{total}
+                        | 个服务
+            .list
+                each service in serviceList
+                    .service
+                        img(src=`/images/ai-market/${service.id}.jpg`)
+                        a.info(href=`AI_market/${service.id}`)
+                            h4.title= service.name
+                            - desc = service.description.length > 90 ? `${service.description.slice(0, 90)}...` : service.description
+                            p.desc= desc
+                            span.deliver
+                                | 交付方式：
+                                | #{service.deliver}
+                        .price
+                            span= service.price
+                            if user
+                                button.btn.btn-primary.show-modal.is-list(data-target='consult') 立即咨询
+            if serviceList.length > 10
+                .pagination
+                    li.prev
+                        a
+                            i.iconfont.icon-left
+                    li.active
+                        a(href="#") 1
+                    li
+                        a(href="#") 2
+                    li
+                        a(href="#") 3
+
+                    li.next
+                        a
+                            i.iconfont.icon-right
+
+    include ../common/modal
+    +modal('需求登记', 'checkIn', '/check-in')
+        .form-group
+            label.form-label(for='hangye').required 您的行业
+            .form-control
+                select(id='businessType' name='businessType')
+                    option(value='0') 工业
+                    option(value='1') 农业
+                    option(value='2') 医疗
+                    option(value='3') 环卫
+                    option(value='4') 装备
+                    option(value='5') 能源
+                    option(value='6') 航空
+                    option(value='7') 其他
+        .form-group
+            label.form-label.required 一句话需求
+            .form-control
+                input(id='demand' name='demand' required)
+        .form-group
+            label.form-label 具体描述
+            .form-control
+                textarea(id="detail" name="detail" rows="3")
+        .form-group
+            label.form-label.required 大概预算
+            .form-control
+                .input-group
+                    input(id='budget' name='budget' required)
+                    span.input-group-addon 元
+        .form-group
+            label.form-label 企业名称
+            .form-control
+                input(id='companyName' name='companyName')
+        .form-group
+            label.form-label 联系人
+            .form-control
+                input(id='linkman' name='linkman')
+        .form-group
+            label.form-label.required 联系手机
+            .form-control
+                input(id='phone' name='phone' required)
+        .form-group
+            label.form-label.required 验证码
+            .form-control
+                .input-validate-code
+                    input(type='text' name='verify' required)
+                    .verify
+                        img(src=`${verifyUrl}`)
+
+    +modal('咨询登记', 'consult', '/consult')
+        .form-group
+            label.form-label 服务名称
+            .form-control
+                input(type='text' name='serviceName' readonly="readonly" value='')
+        .form-group
+            label.form-label.required 问题标题
+            .form-control
+                input(type='text' name='issueTitle' placeholder='请一句话描述您的问题' required)
+        .form-group
+            label.form-label.required 具体描述
+            textarea(placeholder='请详细描述您的问题' name="issueDesc" rows="3" required)
+        .form-group
+            label.form-label 企业名称
+            .form-control
+                input(type='text' name='companyName' placeholder='请输入企业名称')
+        .form-group
+            label.form-label 联系人
+            .form-control
+                input(name='linkman' placeholder='请输入联系人')
+        .form-group
+            label.form-label.required 联系手机
+            .form-control
+                input(name='phone' placeholder='请输入联系手机')
+        .form-group
+            label.form-label.required 验证码
+            .form-control
+                .input-validate-code
+                    input(type='text' name='verify' placeholder='请输入验证码' required)
+                    .verify
+                        img(src=`${verifyUrl}`)
+
+    
+block localScripts
+    script(src='/js/validate/jquery.validate.min.js')  
+    script(src='/js/validate/localization/messages_zh.js')  
+    script(src='/js/form-validate.js')

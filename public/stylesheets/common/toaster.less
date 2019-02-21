@@ -1,0 +1,41 @@
+.toaster {
+    display: none;
+    position: fixed;
+    right: 30px;
+    top: 60px;
+    padding: 14px 16px 14px 38px;
+    border-radius: 4px;
+    background-color: #323232;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    // animation: fade 4s ease;
+    .iconfont {        
+        position: absolute;
+        top: 14px;
+        left: 12px;
+    }
+    .icon-info {
+        color: #00c1de;
+    }
+    .icon-error {
+        color: #f54743;
+    }
+    .icon-success {
+        color: #3c9f3a;
+    }
+    .icon-warning {
+        color: #ff8a00;
+    }
+    > span {        
+        color: fade(#fff, 90%);
+        white-space: nowrap;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
