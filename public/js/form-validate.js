@@ -112,7 +112,7 @@ function isDate8(sDate) {
 
 $(function () {
     // toaster
-    function toaster(status, message) {
+    function toaster (status, message) {
         var $toaster_dom = $('<div class="toaster toaster-' + status + '"><i class="iconfont icon-' + status + '"></i><span>' + message + '</span></div>');
         $toaster_dom.appendTo('body').fadeIn('slow');
         var timer = setTimeout(function () {
@@ -121,6 +121,27 @@ $(function () {
             })
         }, 5000)
     }
+
+    // 退出登录
+    $('.logout').on('click', function(e) {
+        e.preventDefault();
+        var logout = $(e.target).attr('href')
+        $.ajax({
+            type: 'POST',
+            url: '/logout',
+            success: function (result) {
+                if (result) {
+                    location.href = location.href;
+                } else {
+                    toaster('error', '退出失败')
+                }
+            },
+            error: function() {
+                toaster('error', '退出失败')
+            }
+        })
+    })
+
 
     // 报名
     $('#signUp').submit(function (e) {
@@ -506,11 +527,7 @@ $(function () {
                 data: data,
                 success: function(result) {
                     if (result.data) {
-                        if (location.search.indexOf('tab') == -1) {
-                            location.href = location.href + '?tab=authentication';
-                        } else {
-                            location.href = location.href
-                        }
+                        location.href = location.origin + location.pathname + '?tab=authentication';
                         setTimeout(function() {
                             toaster('success', '提交成功！')
                         }, 100)
@@ -644,12 +661,8 @@ $(function () {
             data: data,
             success: function(result) {
                 if (result.data) {
-                    var scrollTop = $(document).scrollTop()
-                    if (location.search.indexOf('tab') == -1) {
-                        location.href = location.href + '?tab=submited';
-                    } else {
-                        location.href = location.href
-                    }
+                    var scrollTop = $(document).scrollTop();
+                    location.href = location.origin + location.pathname + '?tab=submited';
                     $('body').scrollTop(scrollTop);
                     setTimeout(function() {
                         toaster('success', '提交结果成功！')
@@ -668,5 +681,10 @@ $(function () {
     // 比赛排行榜--赛季
     $('#ranking form[name=rankingData] input[type=radio]').on('click', function() {
         $(this).parents('form').submit()
+    })
+
+    // 重新认证
+    $('.certify-restart').on('click', function() {
+        location.href = location.origin + location.pathname + '?tab=authentication&certifyRestart=1';
     })
 }) 

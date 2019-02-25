@@ -28,7 +28,8 @@ const {
   getCompetitionSubmit,
   getCompetitionRanks,
   getCompetitionMyScore,
-  postFeedback
+  postFeedback,
+  logout
 } = require('../services/request')
 
 function getCompetition(type, id) {
@@ -61,7 +62,7 @@ router.get('/', async function (ctx, next) {
     // 获取提交结果
     const submitedFiles = ctx.state.user && isApplied ? await getCompetitionResult(ctx, competition.section) : [];
     // 获取比赛排名
-    const rankingData = ctx.state.user ? await getCompetitionRanks(ctx, {section: rankingSection, pageNo, pageSize}) : {};
+    const rankingData = await getCompetitionRanks(ctx, {section: rankingSection, pageNo, pageSize});
     // 获得我的成绩
     const myScore = rankingSection == '0' ? await getCompetitionMyScore(ctx) : null
     // console.log('myScore -->', myScore)
@@ -158,7 +159,7 @@ router.get('/', async function (ctx, next) {
     ctx.body = await checkVerify(ctx)
   })
   .post('/check-in', async (ctx, next) => {
-    console.log('check-in -->', 'check-in')
+    // console.log('check-in -->', 'check-in')
     ctx.body = await getDemandAdd(ctx)
   })
   .post('/consult-add', async (ctx, next) => {
@@ -180,6 +181,17 @@ router.get('/', async function (ctx, next) {
   .post('/suggestion', async (ctx, next) => {
     ctx.body = await postFeedback(ctx)
   })
+  // 退出登录
+  .post('/logout', async (ctx, next) => {
+    const result = await logout(ctx)
+    if (result.data) {
+      ctx.cookies.set('xuelangyun_login_uid','',{signed:false,maxAge:0,overwrite:true,domain:'.xuelangyun.com'})
+      ctx.cookies.set('xuelangyun_login_ticket','',{signed:false,maxAge:0,overwrite:true,domain:'.xuelangyun.com'})
+      ctx.body = true
+    } else {
+      ctx.body = false
+    }
+  })
   .get('/schoolName', async (ctx, next) => {
     ctx.body = await getSchool(ctx)
   })
@@ -196,6 +208,8 @@ router.get('/', async function (ctx, next) {
     ctx.body = await saveCertification(ctx)
   })
   .get('/user', async function (ctx, next) {
+    const { certifyRestart } = ctx.query;
+    // console.log('ctx.query -->', ctx.query)
     const userInfo = await getUserInfo(ctx);
     const parentRegionList = await getRegion(ctx, null)
     const regionList = await getRegion(ctx, userInfo.parentRegionId);
@@ -211,8 +225,13 @@ router.get('/', async function (ctx, next) {
       region += ' ' + _find(regionList, n => n.id == userInfo.regionId).name;
     }
     userInfo.region = region;
-    userInfo.education = education[userInfo.educationType];
-    userInfo.profession = profession[userInfo.professionType];
+    const _education = _find(education, n => n.value == userInfo.educationType);
+    const _profession = _find(profession, n => n.value == userInfo.professionType);
+    userInfo.education = _education ? _education.name : '';
+    userInfo.profession = _profession ? _profession.name : '';
+
+    // console.log('certificationStatus', certificationStatus)
+    
     await ctx.render('user', {
       ...ctx.state,
       challenge,
@@ -223,16 +242,7 @@ router.get('/', async function (ctx, next) {
       parentRegionList,
       regionList,
       certificationStatus,
-    })
-  })
-  .get('/error/404', async (ctx) => {
-    await ctx.render('common/error', {
-      title: '404错误！'
-    })
-  })
-  .get('/error/500', async (ctx) => {
-    await ctx.render('common/error', {
-      title: '500错误！'
+      certifyRestart: certifyRestart ? true : false
     })
   })
 

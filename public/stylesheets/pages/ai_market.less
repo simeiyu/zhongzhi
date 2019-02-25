@@ -7,7 +7,10 @@
         display: flex;
         .img {
             height: 300px;
-            flex: 0 0 36%;
+            // flex: 0 0 36%;
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-basis: 36%;
             display: flex;
             align-items: center;
             background-color: #f7fbfe;
@@ -19,7 +22,10 @@
         }
         .info {
             padding: 16px 20px 0;
-            flex: 1 1 auto;
+            // flex: 1 1 auto;
+            flex-shrink: 1;
+            flex-grow: 1;
+            flex-basis: auto;
             .title {
                 font-weight: normal;
                 font-size: 24px;
@@ -56,7 +62,10 @@
 }
 /* 搜索 */
 .search {
-    flex: 1 1 auto;
+    // flex: 1 1 auto;
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: auto;
     // display: flex;
     // align-items: center;
     &-wrapper {
@@ -73,6 +82,7 @@
         font-size: 16px;
         color: #fff;
         .linear_gradient(left);
+        background-color: #00ddfe;
     }
     form {
         width: 100%;
@@ -96,9 +106,9 @@
         content: '或';
         font-size: 16px;
         color: #888;
-        padding: 8px;
+        padding: 6px;
         line-height: 24px;
-        margin: 0 20px;
+        margin: 0 16px;
     }
     &::after {
         position: absolute;

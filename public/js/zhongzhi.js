@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // 根据职业显示表单
     function followProfession(professionType) {
         $('#profession_' + professionType).show().find('span.static').next().attr('disabled', false);
@@ -23,14 +24,14 @@ $(document).ready(function() {
         }
         return null;
     }
-
+    
     if ($('.tab')) {
         var qs_tab = getTargetTab();
         if (qs_tab) {
             $('.tab').find('.tab-nav a[data-target=' + qs_tab + ']').parent().addClass('active').siblings().removeClass('active').parents('.tab').children('.tab-content').find('#' + qs_tab).show().siblings().hide();
             if (qs_tab == 'ranking') {
-                var top = $('.tab').offset().top
-                $(document).scrollTop(top);
+                var scrollTop = $(document).scrollTop()
+                $(document).scrollTop(scrollTop);
             }
         }
     }
@@ -61,7 +62,13 @@ $(document).ready(function() {
         $(this).hide();
     })
     $('.user-info').on('click', '.btn-cancel', function() {
-        var $form = $(this).parents('form')        
+        var $form = $(this).parents('form')
+        if ($form.attr('id') == 'currentState') {
+            var professionType = $(this).attr('data-professionType');
+            $form.children('.form-group').first().find('input[value=' + professionType + ']').attr('checked', true).parent('label').attr('class', 'checked')
+            .siblings().removeClass('checked').children('input').attr('checked', false);
+            followProfession(professionType)
+        }
         if ($form.hasClass('form-editor')) {
             $form.removeClass('form-editor').addClass('form-static').prev().find('.btn-edit').show();
         } else if ($form.hasClass('form-password')) {
@@ -105,5 +112,4 @@ $(document).ready(function() {
     $('.modal').on('click', '.hide-modal', function(e) {
         $(this).parents('.modal').addClass('fade');
     });
-
 })

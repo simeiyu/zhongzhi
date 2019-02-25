@@ -16,6 +16,11 @@
             font-size: 24px;
             font-weight: normal;
             color: #222;
+            &:not(:first-child) {
+                padding-top: 42px;
+                border-top: 1px solid #ebf0f7;
+                margin-top: 30px;
+            }
         }
         > ul {
             margin-left: -20px;
@@ -74,6 +79,7 @@
                         }
                         &.on {
                             .linear_gradient(left);
+                            background-color: #00ddfe;
                             &::after {
                                 border-color: #04abc4 transparent transparent #04abc4;
                             }
@@ -213,6 +219,7 @@
         padding: 10px 0;
         &-header {
             margin: 10px 0;
+            list-style: none;
             > li {
                 position: relative;
                 display: inline-block;
@@ -225,7 +232,7 @@
                 color: #888;
                 background-color: #f2f5fa;
                 &:not(:last-child) {
-                    margin-right: 8px;
+                    margin-right: 6px;
                 }
                 &:first-child, &:nth-child(2) {
                     &::after {
@@ -376,6 +383,9 @@
                 font-size: 16px;
                 color: #222;
             }
+        }
+        .certify-restart {
+            margin-top: 40px;
         }
     }
 }

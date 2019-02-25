@@ -30,6 +30,18 @@ exports.getUserInfo = async (ctx) => {
     return data
 }
 
+// 退出登录
+exports.logout = async (ctx) => {
+    const url = '/api/logout';
+    
+    const cookie = ctx.request.header.cookie || '';
+    return await request(url, {
+        headers: {
+            Cookie: cookie
+        }
+    });
+}
+
 // 我的比赛
 exports.getMyCompetition = async (ctx) => {
     const url = '/api/personal/getMyCompetition';

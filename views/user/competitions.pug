@@ -11,8 +11,7 @@ mixin my_competitions(title, type, list)
                         - const status = item.status == 'on' ? '进行中' : '已结束'
                         span.status(class=`${item.status}`)= status
     else
-        - const info = `当前没有参加的${title}`
-        p= info
+        p 尚未参加比赛
 
 .user-competitions
     +my_competitions('挑战赛', 'challenge', challenge)

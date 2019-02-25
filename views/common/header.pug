@@ -16,12 +16,14 @@
                 a.user-suggestion.show-modal(data-target='suggestion') 意见反馈
                 .user-avatar
                     .user-photo
-                        img(src='/images/user-photo.jpg' alt=`${user.name}`)
+                        //- img(src='/images/user-photo.jpg' alt=`${user.name}`)
+                        i.iconfont.icon-users
+                        span= user.username
                     ul
                         li
                             a(href='/user') 个人中心
                         li
-                            a(href=`${home}/login?back=${currentUrl}`) 退出登录
+                            a(href=`${home}/login?back=${currentUrl}`).logout 退出登录
             else
                 a.login(href=`${home}/login?back=${currentUrl}`) 登录
                 a.register(href=`${home}/register`) 注册

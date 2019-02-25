@@ -58,5 +58,18 @@
                         li.companel-bonus
                             span 奖励
                             b= item.bonus
-                        - const status = item.status == 'on' ? '进行中' : '已结束'
-                        li.companel-status(class=`${item.status}`)= status
+                        //- - const status = item.status == 'on' ? '进行中' : '已结束'
+                        if item.status == 'on'
+                            li.companel-status(class=`${item.status}`)
+                                | 进
+                                <br>
+                                | 行
+                                <br>
+                                | 中
+                        else
+                            li.companel-status(class=`${item.status}`)
+                                | 已
+                                <br>
+                                | 结
+                                <br>
+                                | 束

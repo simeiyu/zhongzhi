@@ -55,11 +55,11 @@
                     span.static= userInfo.profession
                     - const professionType = userInfo.professionType || '1'
                     .radio-group.editor
-                        each name, value in profession
-                            - const checked = value == professionType
+                        each item in profession
+                            - const checked = item.value == professionType
                             label(class=`${checked ? 'checked' : ''}`)
-                                input(type='radio' name='professionType' value=`${value}` checked=checked)
-                                | #{name}
+                                input(type='radio' name='professionType' value=`${item.value}` checked=checked)
+                                | #{item.name}
             #profession_1
                 .form-group.schoolName
                     label.form-label.required 在读院校
@@ -77,9 +77,9 @@
                     .form-control.user-info-item
                         span.static= userInfo.education
                         select(name='educationType').editor
-                            each name, value in education
-                                - const selected = value == userInfo.educationType
-                                option(value=`${value}` selected=selected)= name
+                            each item in education
+                                - const selected = item.value == userInfo.educationType
+                                option(value=`${item.value}` selected=selected)= item.name
                 .form-group.graduationDate
                     label.form-label.required 毕业时间
                     .form-control.user-info-item
@@ -101,13 +101,13 @@
                     label.form-label.required 职业描述
                     .form-control.user-info-item
                         span.static= userInfo.positionDesc
-                        textarea(type='text' name='positionDesc' rows="5" value=`${userInfo.positionDesc || ''}` required).editor
+                        textarea(type='text' name='positionDesc' rows="5" required).editor= userInfo.positionDesc
             #profession_0
                 .form-group.positionDesc
                     label.form-label 职业描述
                     .form-control.user-info-item
                         span.static= userInfo.positionDesc
-                        textarea(type='text' name='positionDesc' rows="5" value=`${userInfo.positionDesc || ''}`).editor
+                        textarea(type='text' name='positionDesc' rows="5").editor= userInfo.positionDesc
             #profession_more
                 .form-group.schoolName
                     label.form-label 毕业院校
@@ -125,9 +125,9 @@
                     .form-control.user-info-item
                         span.static= userInfo.education
                         select(name='educationType').editor
-                            each name, value in education
-                                - const selected = value == userInfo.educationType
-                                option(value=`${value}` selected=selected)= name
+                            each item in education
+                                - const selected = item.value == userInfo.educationType
+                                option(value=`${item.value}` selected=selected)= item.name
                 .form-group.graduationDate
                     label.form-label 毕业时间
                     .form-control.user-info-item
@@ -135,7 +135,7 @@
                         input(type='text' name='graduationDate' autocomplete='off' value=`${userInfo.graduationDate || ''}`).editor.datePicker
             .form-group.form-btns
                 button(type='submit').btn.btn-primary.btn-submit 保存
-                button(type='reset').btn.btn-default.btn-cancel 取消
+                button(type='reset' data-professionType=`${professionType}`).btn.btn-default.btn-cancel 取消
             
     .user-info-panel
         .user-info-title

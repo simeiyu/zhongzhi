@@ -38,9 +38,9 @@ app.use(async (ctx, next) => {
     await next()
   } catch (err) {
     if (err) {
-      if (!isDev) {
-        ctx.redirect(`/error/${getErrorStatusCode(err.statusCode)}`)
-      }
+      // if (!isDev) {
+        ctx.redirect(`${ctx.state.home}/login?back=${ctx.request.url}`)
+      // }
       console.log('err: ', err)
     }
   }

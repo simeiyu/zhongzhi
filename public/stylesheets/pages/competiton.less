@@ -7,11 +7,18 @@
         }
     }
     ul {
-        display: flex;
-        align-items: stretch;
+        // display: flex;
+        // align-items: stretch;
+        > li:not(.companel-status) {
+            float: left;
+        }
+        .clearfix()
     }
     &-img {
-        flex: 0 0 366px;
+        // flex: 0 0 366px;
+        // flex-shrink: 0;
+        // flex-grow: 0;
+        // flex-basis: 366px;
         padding: 8px;
         width: 366px;
         height: 246px;
@@ -22,6 +29,7 @@
     }
     &-info {
         padding: 8px 20px 8px 12px;
+        width: e('calc(100% - 366px - 190px - 40px)');
         @media (min-width: 1200px) {
             padding-right: 40px;
         }
@@ -68,10 +76,16 @@
         }
     }
     &-bonus {
-        flex: 0 0 190px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        // flex: 0 0 190px;
+        // flex-shrink: 0;
+        // flex-grow: 0;
+        // flex-basis: 190px;
+        
+        width: 190px;
+        margin-top: e('calc((246px - 84px) / 2)');
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
         padding: 8px 16px;
         >span {
             display: block;
@@ -88,16 +102,24 @@
     }
     &-status {
         margin: -1px -1px -1px 0;
-        flex: 0 0 40px;
-        padding: 8px;
+        // flex: 0 0 40px;
+        // flex-shrink: 0;
+        // flex-grow: 0;
+        // flex-basis: 40px;
+        float: right;
+        width: 40px;
+        height: 248px;
+        padding:  8px;
+        padding-top: 70px;
         color: #fff;
         font-size: 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
         &.on {
             .linear_gradient(top);
+            background-color: #00ddfe;
         }
         &.off {
             background-color: @disabled;
@@ -153,6 +175,7 @@
     width: 180px;
     height: 40px;
     .linear_gradient(left);
+    background-color: #00ddfe;
     color: #fff;
     text-align: center;
     font-weight: normal;
@@ -209,7 +232,10 @@
     align-items: stretch;
     font-weight: normal;
     > div {
-        flex: 1 1 100% / 3;
+        // flex: 1 1 100% / 3;
+        flex-shrink: 1;
+        flex-grow: 1;
+        flex-basis: 100% / 3;
         position: relative;
         &.first {
             background: url(../images/ranking-bg-1.png) left bottom / 100% auto no-repeat;

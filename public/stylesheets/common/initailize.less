@@ -85,6 +85,7 @@ button {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: #00ddfe;
 }
 
 .border-gradient(@dir, @border-width: 2px, @border-style: solid) {
@@ -93,6 +94,7 @@ button {
     border-image: -webkit-linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
     border-image: -o-linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
     border-image: linear-gradient(@dir, @bg-green, @bg-blue) 2 2;
+    border-color: #00ddfe;
 }
 .text-linear {
     .text-gradient(left);
@@ -200,9 +202,14 @@ button {
         }
         &.active {
             .linear_gradient(top);
+            background-color: #00ddfe;
             color: #fff;
             border: none;
             padding: 5px;
         }
     }
+}
+.ui-datepicker-year, .ui-datepicker-month {
+    height: auto;
+    padding: 0;
 }

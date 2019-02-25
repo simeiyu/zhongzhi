@@ -1,16 +1,16 @@
-exports.profession = {
-    '1': '学生',
-    '2': '在职员工',
-    '3': '自由职业',
-    '0': '其他'
-}
-exports.education = {
-    '2': '本科',
-    '3': '硕士',
-    '4': '博士',
-    '1': '专科',
-    '0': '高中',
-}
+exports.profession = [
+    {value:'1', name: '学生'},
+    {value:'2', name: '在职员工'},
+    {value:'3', name: '自由职业'},
+    {value:'0', name: '其他'}
+]
+exports.education = [
+    {value: '2', name: '本科'},
+    {value: '3', name: '硕士'},
+    {value: '4', name: '博士'},
+    {value: '1', name: '专科'},
+    {value: '0', name: '高中'},
+]
 exports.tags = [
     {
         title: '工业',

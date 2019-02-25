@@ -1,6 +1,6 @@
 .header {
     @primary: #00ddfe;
-
+    height: 50px;
     background-color: @bg-header;
     .has-banner & {
         background: none;
@@ -15,15 +15,17 @@
         margin: 0 auto;
         width: 100%;
         height: 50px;
-        display: flex;
-        align-items: center;
+        // display: flex;
+        // align-items: center;
+        .clearfix();
         @media (min-width: 1670px) {
             width: 1670px;
         }
     }
     .logo {
         &-xuelangyun, &-zhongzhi {
-            margin-top: 4px;
+            margin-top: 8px;
+            float: left;
             .iconfont {
                 font-size: 34px;
                 &.icon-xuelangyun, &.icon-zhongzhi {
@@ -40,9 +42,14 @@
     }
     .nav {
         margin: 0 32px;
-        flex: 1 1 auto;
-        display: flex;
+        float: left;
+        // flex: 1 1 auto;
+        // flex-shrink: 1;
+        // flex-grow: 1;
+        // flex-basis: auto;
+        // display: flex;
         li {
+            display: inline-block;
             padding: 0 15px;
             &.active {
                 a {
@@ -55,7 +62,7 @@
             display: block;
             padding: 14px 10px 12px;
             font-size: 16px;
-            line-height: 24px;
+            line-height: 22px;
             color: @nav-color;
             transition: color .3s linear;
             &:hover {
@@ -78,31 +85,50 @@
     }
     .user {
         &-view {
-            display: flex;
-            align-items: center;
+            // display: flex;
+            // align-items: center;
+            float: right;
         }
         &-suggestion {
+            float: left;
             color: #fff;
             cursor: pointer;
+            margin-top: 16px;
             &:hover {
                 text-decoration: none;
             }
         }
         &-avatar {
-            width: 100px;
+            margin-left: 32px;
             height: 50px;
             position: relative;
+            display: inline-block;
             .user-photo {
-                margin: 9px auto;
-                width: 32px;
+                margin: 9px 0;
+                min-width: 100px;
                 height: 32px;
-                border-radius: 50%;
+                line-height: 32px;
                 overflow: hidden;
                 text-align: center;
                 cursor: pointer;
                 > img {
                     width: 100%;
                     height: auto;
+                }
+                .iconfont {
+                    margin-right: 8px;
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background-color: #fff;
+                    color: #000;
+                    font-size: 26px;
+                    overflow: hidden;
+                    float: left;
+                    + span {
+                        color: #fff;
+                    }
                 }
             }
             > ul {
@@ -113,6 +139,7 @@
                 top: 100%;
                 margin-top: 1px;
                 padding: 5px 0;
+                list-style: none;
                 background-color: #2b2b32;
                 > li > a {
                     display: block;

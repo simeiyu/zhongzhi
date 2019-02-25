@@ -39,7 +39,7 @@ block content
                             - checked = sorted == 2
                             input(type='radio' name='sort' checked=checked value='2')
                             | 价格
-                            i.iconfont.icon-xiangxia
+                            i.iconfont.icon-shengxu
 
                     - const total = serviceList.length
                     span.list-total
@@ -156,9 +156,3 @@ block content
                     input(type='text' name='verify' placeholder='请输入验证码' required)
                     .verify
                         img(src=`${verifyUrl}`)
-
-    
-block localScripts
-    script(src='/js/validate/jquery.validate.min.js')  
-    script(src='/js/validate/localization/messages_zh.js')  
-    script(src='/js/form-validate.js')
